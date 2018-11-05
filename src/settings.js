@@ -1,8 +1,8 @@
 module.exports = getSettings
 
 function getSettings(qs) {
-  const graphSettings = getAvailableGraphs(qs); 
-  const pathFinderSettings = getAvailablePathfinders(qs); 
+  const graphSettings = getAvailableGraphs(qs);
+  const pathFinderSettings = getAvailablePathfinders(qs);
 
   return {
     graphSettings,
@@ -32,10 +32,10 @@ function getAvailableGraphs(qs) {
     name: 'New York (730K edges, 7.6 MB)'
   },
   // Commenting this out, as on mobile devices it may crash the browser.
-  //  {
-  //   value: 'tokyo-roads',
-  //   name: 'Tokyo (879K edges, 12.3 MB)'
-  // }
+    {
+     value: 'lima-roads',
+     name: 'Lima'
+   }
 ];
 
   return {

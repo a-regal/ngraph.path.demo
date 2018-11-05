@@ -23,7 +23,7 @@ const bus = require('./bus');
 
 // First of all, read what we currently have in the query string.
 const qs = queryState({
-  graph: 'amsterdam-roads'
+  graph: 'lima-roads'
 });
 
 qs.onChange(updateStateFromQueryString);
@@ -61,7 +61,7 @@ const api = {
   progress: new Progress(),
   stats,
 
-  routeStart, 
+  routeStart,
   routeEnd,
   pathInfo: {
     svgPath: '',
@@ -81,7 +81,7 @@ module.exports = api;
 // The app model is ready at this point.
 
 function updateStateFromQueryString(queryState) {
-  let searchChanged = (queryState.fromId !== routeStart.pointId) || 
+  let searchChanged = (queryState.fromId !== routeStart.pointId) ||
                       (queryState.toId !== routeEnd.pointId);
 
   if (searchChanged) {
@@ -121,7 +121,7 @@ function updateRoute() {
   if (!(routeStart.visible && routeEnd.visible)) {
     api.pathInfo.svgPath = '';
     return;
-  } 
+  }
 
   let fromId = routeStart.pointId;
   let toId = routeEnd.pointId;
@@ -145,7 +145,7 @@ function updateQueryString() {
     // need to throttle
     clearTimeout(pendingQueryStringUpdate);
     pendingQueryStringUpdate = 0;
-  } 
+  }
 
   pendingQueryStringUpdate = setTimeout(() => {
     pendingQueryStringUpdate = 0;

@@ -2,8 +2,8 @@ const forEachLine = require('for-each-line');
 const aStarPathSearch = require('ngraph.path').astarBi;
 
 const graph = require('ngraph.graph')();
-let graphFile = './data/USA-road-d.NY.gr';
-let coordinatesFile = './data/USA-road-d.NY.co';
+let graphFile = './static/dehli-roads.gr';
+let coordinatesFile = './static/dehli-roads.co';
 
 console.time('reading');
 forEachLine(graphFile, (line) => {
