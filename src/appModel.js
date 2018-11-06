@@ -51,9 +51,7 @@ let pendingQueryStringUpdate = 0; // Used to throttle query string updates.
 let routeStart = new RouteHandleViewModel(updateRoute, findNearestPoint);
 let routeEnd = new RouteHandleViewModel(updateRoute, findNearestPoint);
 
-for (i=0; i < pois.lenght; i++) {
-    routeStart.setFrom()
-}
+setPOILocations();
 
 let stats = {
   visible: false,
