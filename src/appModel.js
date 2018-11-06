@@ -19,6 +19,9 @@ const queryState = require('query-state');
 // And this is how the state communicates asynchronously with App.vue
 const bus = require('./bus');
 
+//Read local csv file
+const csv = require('fast-csv');
+
 // Now that we are done with imports, lets initialize the state.
 
 // First of all, read what we currently have in the query string.
@@ -33,11 +36,24 @@ let graphBBox;  // current bounding box for a graph
 let hetTestTree;       // this tree helps us find graph node under cursor
 let pathFinder;        // currently selected pathfinder
 let pathFindersLookup; // initialized after we load graph
+let pois = []; //Array of points of interest for routing
+
+csv.fromPath('../static/Combined_SH.csv')
+  .on('data', function(data) {
+    pois.push([findNearestPoint(data[1], data[2]), findNearestPoint(data[3], data[4])]); //Read source and target, append array [NN_Source, NN_Target]
+  })
+  .on('end', function(data){
+    console.log('Loading finished')
+  })
 
 let pendingQueryStringUpdate = 0; // Used to throttle query string updates.
 
 let routeStart = new RouteHandleViewModel(updateRoute, findNearestPoint);
 let routeEnd = new RouteHandleViewModel(updateRoute, findNearestPoint);
+
+for (i=0; i < pois.lenght; i++) {
+    routeStart.setFrom()
+}
 
 let stats = {
   visible: false,
@@ -283,6 +299,22 @@ function setCurrentSearchFromQueryState() {
   let to = graph.getNode(toId)
   if (from) routeStart.setFrom(from)
   if (to) routeEnd.setFrom(to)
+}
+
+function setPOILocations() {
+  if (!graph) return;
+
+  for (let i = 0; i < pois.lenght; i++) {
+
+    let fromId = pois[i][0];
+    let toId = pois[i][1];
+    let from = graph.getNode(fromId)
+    let to = graph.getNode(toId)
+    if (from) routeStart.setFrom(from)
+    if (to) routeEnd.setFrom(to)
+
+    updateRoute();
+  }
 }
 
 function updateSelectedGraph() {

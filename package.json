@@ -10,6 +10,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "fast-csv": "^2.4.1",
+    "fs": "0.0.1-security",
     "harp": "^0.29.0",
     "ngraph.coarsen": "^1.4.1",
     "ngraph.events": "0.0.4",
